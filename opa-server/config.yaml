@@ -1,0 +1,13 @@
+# opa run -s -c config.yaml
+services:
+  - name: bundle-server
+    url: http://localhost:8080/
+
+bundles:
+  bundle-server:
+    service: bundle-server
+    resource: bundles/bundle.tar.gz
+    polling:
+      # long_polling_timeout_seconds: 10
+      min_delay_seconds: 10
+      max_delay_seconds: 20
