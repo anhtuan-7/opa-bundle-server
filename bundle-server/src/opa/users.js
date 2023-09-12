@@ -8,7 +8,7 @@ async function makeUsersData(filePath) {
 
   users.forEach((user) => {
     user_id = user.dataValues.userid;
-    data["users"][user_id] = {
+    data[user_id] = {
       username: user.dataValues.username,
       roles: user.dataValues.roles.map((role) => role.roleid),
     };
