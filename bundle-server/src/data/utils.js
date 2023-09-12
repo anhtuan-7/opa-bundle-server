@@ -1,29 +1,33 @@
 const tar = require("tar");
 const { updateUsers } = require("../opa/users.js");
 
-async function makeBundle(bundlePath = "../bundle") {
+async function makeBundle(bundlePath) {
   tar
     .c(
       {
         gzip: true,
         file: `${bundlePath}/bundle.tar.gz`,
       },
-      [".manifest", "policy/", "roles/", "users/"]
+      [
+        "./src/data/.manifest",
+        "./src/data/policy/",
+        "./src/data/roles/",
+        "./src/data/users/",
+      ]
     )
     .then(() => {
       console.log("Bundle file has been created.");
     })
-    .catch(() => {
+    .catch((e) => {
       console.log("Failed to create bundle.");
+      console.log(e);
     });
 }
 
-makeBundle();
-
 async function update(tableToUpdate) {
   //update data file
-  await updateUsers();
-  await makeBundle();
+  await updateUsers("./src/data/users/data.json");
+  await makeBundle("./src/bundle");
 }
 
 // update();

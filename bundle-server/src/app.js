@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const { Client } = require("pg");
 
-const update = require("./opa-data/utils");
+const update = require("./data/utils");
 
 const app = express();
 

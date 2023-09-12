@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { fetchUsers } = require("../services/users.js");
 
-async function makeUsersData(filePath = "../opa-data/users/data.json") {
+async function makeUsersData(filePath) {
   users = await fetchUsers();
 
   data = { users: {} };
