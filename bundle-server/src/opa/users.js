@@ -1,7 +1,8 @@
 const fs = require("fs");
+const axios = require("axios");
 const { fetchUsers } = require("../services/users.js");
 
-async function makeUsersData(filePath) {
+async function getUserData() {
   users = await fetchUsers();
   data = {};
 
@@ -14,8 +15,11 @@ async function makeUsersData(filePath) {
   });
 
   jsonData = JSON.stringify(data, null, 2);
+  return jsonData;
+}
 
-  fs.writeFile(filePath, jsonData, (err) => {
+function writeUserData(filePath, data) {
+  fs.writeFile(filePath, data, (err) => {
     if (err) {
       console.error("Error writing JSON file:", err);
     } else {
@@ -24,4 +28,18 @@ async function makeUsersData(filePath) {
   });
 }
 
-exports.updateUsers = makeUsersData;
+function pushUserData(data) {
+  axios({
+    method: "PUT",
+    url: "http://localhost:8181/v1/data/users/",
+    data: data,
+  });
+}
+
+async function updateUsers(filePath) {
+  jsonData = await getUserData();
+  writeUserData(filePath, jsonData);
+  pushUserData(jsonData);
+}
+
+exports.updateUsers = updateUsers;

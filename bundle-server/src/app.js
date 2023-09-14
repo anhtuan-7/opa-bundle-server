@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const { Client } = require("pg");
 
-const update = require("./data/utils");
+const push = require("./opa/utils");
 
 const app = express();
 
@@ -25,27 +25,11 @@ client.connect((err, client) => {
   } else {
     client.on("notification", (msg) => {
       console.log(msg.payload); //{"table" : "products", "action" : "INSERT", "data" : {"id":1,"name":"bag","quantity":100000}}
-      update();
+      push();
     });
     client.query("LISTEN events");
     console.log("Connected to PostgreSQL");
   }
-});
-
-app.get("/bundles/:filename", (req, res) => {
-  const filePath = __dirname + "/bundle/" + req.params.filename;
-  res.download(
-    filePath,
-    "bundle.tar.gz", // Remember to include file extension
-    (err) => {
-      if (err) {
-        res.send({
-          error: err,
-          msg: "Problem downloading the file",
-        });
-      }
-    }
-  );
 });
 
 app.listen(PORT, HOST, () => console.log("Server listening to port " + PORT));
