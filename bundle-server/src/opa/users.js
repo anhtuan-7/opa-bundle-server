@@ -4,7 +4,7 @@ const { fetchUsers } = require("../services/users.js");
 
 async function getUserData() {
   users = await fetchUsers();
-  data = {};
+  const data = {};
 
   users.forEach((user) => {
     user_id = user.dataValues.userid;

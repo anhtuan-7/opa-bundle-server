@@ -24,8 +24,9 @@ client.connect((err, client) => {
     console.error(err);
   } else {
     client.on("notification", (msg) => {
-      console.log(msg.payload); //{"table" : "products", "action" : "INSERT", "data" : {"id":1,"name":"bag","quantity":100000}}
-      push();
+      //console.log(msg.payload); //{"table" : "products", "action" : "INSERT", "data" : {"id":1,"name":"bag","quantity":100000}}
+      table = JSON.parse(msg.payload)["table"];
+      push(table);
     });
     client.query("LISTEN events");
     console.log("Connected to PostgreSQL");
