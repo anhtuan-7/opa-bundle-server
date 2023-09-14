@@ -13,7 +13,7 @@ const PORT = 8080;
 
 const client = new Client({
   user: "postgres",
-  host: "172.24.208.1",
+  host: "172.24.80.1",
   database: "access-data",
   password: "1",
   port: 5432,

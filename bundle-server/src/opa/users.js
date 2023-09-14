@@ -3,8 +3,7 @@ const { fetchUsers } = require("../services/users.js");
 
 async function makeUsersData(filePath) {
   users = await fetchUsers();
-
-  data = { users: {} };
+  data = {};
 
   users.forEach((user) => {
     user_id = user.dataValues.userid;

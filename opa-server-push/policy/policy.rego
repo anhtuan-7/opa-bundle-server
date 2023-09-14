@@ -15,3 +15,5 @@ allow = {
     action = data.roles[r].permissions[input.resource][_]
     action == input.action
 }
+
+# opa run -s .

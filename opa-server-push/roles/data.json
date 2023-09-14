@@ -1,0 +1,15 @@
+{
+  "1": {
+    "name": "admin",
+    "permissions": {
+      "resource-1": ["read", "write"],
+      "resource-2": ["read", "write"]
+    }
+  },
+  "2": {
+    "name": "user",
+    "permissions": {
+      "resource-2": ["read"]
+    }
+  }
+}

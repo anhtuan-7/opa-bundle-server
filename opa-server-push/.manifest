@@ -1,0 +1,8 @@
+{
+  "revision": "1",
+  "roots": [
+    "policy",
+    "users",
+    "roles"
+  ]
+}

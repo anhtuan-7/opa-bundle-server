@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 // const sequelize = new Sequelize("postgres://user:pass@example.com:5432/dbname");
 
 const sequelize = new Sequelize("access-data", "postgres", "1", {
-  host: "172.24.208.1",
+  host: "172.24.80.1",
   dialect: "postgres",
   define: {
     timestamps: false, // Set to true if your table has created_at and updated_at columns
