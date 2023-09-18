@@ -15,14 +15,10 @@ async function fetchUsers() {
         },
       ],
     });
-    // console.log(users.every((user) => user instanceof UserModel)); // true
-    //console.log("All users:", JSON.stringify(users, null, 2));
     return users;
   } catch (error) {
     console.error("Error fetching users:", error);
   }
 }
 
-//fetchUsers();
-
-exports.fetchUsers = fetchUsers; // Call the async function to start the operation
+exports.fetchUsers = fetchUsers;

@@ -1,9 +1,10 @@
 const fs = require("fs");
+const axios = require("axios");
 const { fetchUsers } = require("../services/users.js");
 
-async function makeUsersData(filePath) {
+async function getUserData() {
   users = await fetchUsers();
-  data = {};
+  const data = {};
 
   users.forEach((user) => {
     user_id = user.dataValues.userid;
@@ -14,8 +15,11 @@ async function makeUsersData(filePath) {
   });
 
   jsonData = JSON.stringify(data, null, 2);
+  return jsonData;
+}
 
-  fs.writeFile(filePath, jsonData, (err) => {
+async function writeUserData(filePath, data) {
+  fs.writeFile(filePath, data, (err) => {
     if (err) {
       console.error("Error writing JSON file:", err);
     } else {
@@ -24,4 +28,9 @@ async function makeUsersData(filePath) {
   });
 }
 
-exports.updateUsers = makeUsersData;
+async function updateUsers(filePath) {
+  jsonData = await getUserData();
+  writeUserData(filePath, jsonData);
+}
+
+exports.updateUsers = updateUsers;

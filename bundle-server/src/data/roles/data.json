@@ -1,15 +1,34 @@
 {
   "1": {
-    "name": "admin",
+    "rolename": "Admin",
     "permissions": {
-      "resource-1": ["read", "write"],
-      "resource-2": ["read", "write"]
+      "Document": [
+        "View",
+        "Edit"
+      ],
+      "Folder": [
+        "View",
+        "Edit"
+      ]
     }
   },
   "2": {
-    "name": "user",
+    "rolename": "User",
     "permissions": {
-      "resource-2": ["read"]
+      "Document": [
+        "View"
+      ],
+      "Folder": [
+        "View"
+      ]
+    }
+  },
+  "3": {
+    "rolename": "Intern",
+    "permissions": {
+      "Document": [
+        "View"
+      ]
     }
   }
 }

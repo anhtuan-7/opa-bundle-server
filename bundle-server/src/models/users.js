@@ -3,7 +3,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../database.js");
 
-// fine the Users model
+// define the Users model
 const UserModel = sequelize.define(
   "users",
   {

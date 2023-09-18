@@ -1,6 +1,21 @@
 const tar = require("tar");
 
 const { updateUsers } = require("../opa/users.js");
+const { updateRoles } = require("../opa/roles.js");
+
+const updateTable = {
+  users: updateUsers,
+  user_roles: updateUsers,
+  roles: updateRoles,
+  role_permissions: updateRoles,
+};
+
+const path = {
+  users: "users",
+  user_roles: "users",
+  roles: "roles",
+  role_permissions: "roles",
+};
 
 async function makeBundle(bundlePath) {
   tar
@@ -23,22 +38,14 @@ async function makeBundle(bundlePath) {
 
 async function update(tableToUpdate) {
   const startTime = performance.now();
-  //update data file
-  await updateUsers(`${__dirname}/users/data.json`);
+
+  await updateTable[tableToUpdate](
+    `${__dirname}/${path[tableToUpdate]}/data.json`
+  );
   await makeBundle(`${__dirname}/../bundle`);
 
   const endTime = performance.now();
   console.log(`Update takes ${endTime - startTime}ms`);
 }
 
-async function push(tableToUpdate) {
-  const startTime = performance.now();
-  //update data file
-  await updateUsers(`${__dirname}/users/data.json`);
-
-  const endTime = performance.now();
-  console.log(`Push takes ${endTime - startTime}ms`);
-}
-
-//update();
 module.exports = update;
