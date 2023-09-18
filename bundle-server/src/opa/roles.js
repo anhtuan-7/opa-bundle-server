@@ -31,7 +31,7 @@ async function getRoleData() {
   return jsonData;
 }
 
-function writeRoleData(filePath, data) {
+async function writeRoleData(filePath, data) {
   fs.writeFile(filePath, data, (err) => {
     if (err) {
       console.error("Error writing JSON file:", err);
@@ -41,18 +41,9 @@ function writeRoleData(filePath, data) {
   });
 }
 
-function pushRoleData(data) {
-  axios({
-    method: "PUT",
-    url: "http://localhost:8181/v1/data/roles/",
-    data: data,
-  });
-}
-
 async function updateRoles(filePath) {
   jsonData = await getRoleData();
   writeRoleData(filePath, jsonData);
-  pushRoleData(jsonData);
 }
 
 exports.updateRoles = updateRoles;

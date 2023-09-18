@@ -18,7 +18,7 @@ async function getUserData() {
   return jsonData;
 }
 
-function writeUserData(filePath, data) {
+async function writeUserData(filePath, data) {
   fs.writeFile(filePath, data, (err) => {
     if (err) {
       console.error("Error writing JSON file:", err);
@@ -28,18 +28,9 @@ function writeUserData(filePath, data) {
   });
 }
 
-function pushUserData(data) {
-  axios({
-    method: "PUT",
-    url: "http://localhost:8181/v1/data/users/",
-    data: data,
-  });
-}
-
 async function updateUsers(filePath) {
   jsonData = await getUserData();
   writeUserData(filePath, jsonData);
-  pushUserData(jsonData);
 }
 
 exports.updateUsers = updateUsers;
