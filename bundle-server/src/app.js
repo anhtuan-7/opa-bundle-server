@@ -1,3 +1,4 @@
+const fs = require("fs");
 const express = require("express");
 const morgan = require("morgan");
 const { Client } = require("pg");
@@ -14,10 +15,11 @@ let lastRequest = 0;
 const HOST = "0.0.0.0";
 const PORT = 8080;
 
-// grep nameserver /etc/resolv.conf | awk '{print $2}'
+const host = fs.readFileSync(`${__dirname}/host.txt`, "utf8").trim();
+
 const client = new Client({
   user: "postgres",
-  host: "172.22.96.1",
+  host: host,
   database: "access-data",
   password: "1",
   port: 5432,
@@ -28,13 +30,13 @@ client.connect((err, client) => {
     console.error(err);
   } else {
     client.on("notification", async (msg) => {
-      //console.log(msg.payload); //{"table" : "products", "action" : "INSERT", "data" : {"id":1,"name":"bag","quantity":100000}}
       table = JSON.parse(msg.payload)["table"];
       await update(table);
       lastUpdate = Date.now();
     });
     client.query("LISTEN events");
     console.log("Connected to PostgreSQL");
+    console.log("Listening....");
   }
 });
 

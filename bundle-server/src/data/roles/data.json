@@ -2,33 +2,21 @@
   "1": {
     "rolename": "Admin",
     "permissions": {
-      "Document": [
-        "View",
-        "Edit"
-      ],
-      "Folder": [
-        "View",
-        "Edit"
-      ]
+      "Document": ["View", "Edit"],
+      "Folder": ["View", "Edit"]
     }
   },
   "2": {
     "rolename": "User",
     "permissions": {
-      "Document": [
-        "View"
-      ],
-      "Folder": [
-        "View"
-      ]
+      "Document": ["View"],
+      "Folder": ["View"]
     }
   },
   "3": {
     "rolename": "Intern",
     "permissions": {
-      "Document": [
-        "View"
-      ]
+      "Document": ["View"]
     }
   }
 }
